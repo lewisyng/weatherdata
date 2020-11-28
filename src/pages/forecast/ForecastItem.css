@@ -1,0 +1,15 @@
+.forecast__results__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+.forecast__results__item img {
+    width: 120%;
+    object-fit: cover;
+}
+
+.forecast__results__item__temp {
+    font-weight: bold;
+}

@@ -1,0 +1,20 @@
+.searchForm {
+    position: relative;
+    /* left: 50%; */
+    /* transform: translate(-50%); */
+    margin: auto 0;
+}
+
+.searchForm input::placeholder {
+    color: white;
+}
+
+.MuiInputBase-input {
+    color: white !important;
+    font-size: 1.4rem !important;
+    text-align: center;
+}
+
+.MuiInputBase-input:focus {
+    border-bottom: 2px solid white;
+}
