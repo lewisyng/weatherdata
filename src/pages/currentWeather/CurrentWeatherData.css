@@ -1,0 +1,58 @@
+.currentWeatherData {
+    display: flex;
+    flex-wrap: wrap;
+    width: clamp(500px, 60%, 700px);
+    margin-top: 2rem;
+    background-color: #F59AB3;
+    color: rgb(41, 41, 41) !important;
+    max-width: 100%;
+}
+
+.currentWeatherData p {
+    padding: 0.5rem 0;
+}
+
+.currentWeatherData__location {
+    font-size: 2.5rem;
+    width: 100%;
+    font-weight: bold;
+    background-color: #ECECEC;
+    text-align: center;
+}
+
+.currentWeatherData__left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #F3C0CE;
+    height: 20vh;
+}
+
+.currentWeatherData__degrees, .currentWeatherData__wind {
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.currentWeatherData__right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0;
+}
+
+.currentWeatherData__weather {
+    position: relative;
+    bottom: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+@media(max-width: 700px){
+    .currentWeatherData__left, .currentWeatherData__right {
+        width: 100%;
+    }
+}

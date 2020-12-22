@@ -1,54 +1,59 @@
 import React, { useEffect, useState } from 'react';
 import './ForecastCard.css';
 import { Card, Tab, Tabs } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import ForecastItem from './ForecastItem';
+import ForecastCardData from './ForecastCardData';
 
 function ForecastCard(props) {
-  const {weatherData} = props;
+  const { weatherData, location } = props;
   const [tab, setTab] = useState();
+  const [selectedTime, setSelectedTime] = useState();
 
   useEffect(() => {
     if (weatherData) {
-      console.log('weatherData', weatherData);
       setTab(Object.keys(weatherData)[0]);
     }
   }, [weatherData]);
 
+  useEffect(() => {
+    if (tab) {
+      setSelectedTime(weatherData[tab][0]);
+    }
+  }, [tab]);
+
   return (
-    <div className='forecastCard'>
-      {tab && (
+    <>
+      {selectedTime && (
         <Card
-          style={{
-            height: '25vh',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-          }}
+          className='forecastCard'
         >
-          <Tabs
-            value={tab}
-            onChange={(event, newValue) => setTab(newValue)}
-          >
+          <Tabs value={tab} onChange={(event, newValue) => setTab(newValue)}>
             {Object.keys(weatherData).map((item) => (
-              <Tab
-                value={item.slice(0, 10)}
-                key={item.slice(0, 10)}
-                label={item.slice(0, 10)}
-              />
+              <Tab value={item} key={item} label={item} />
             ))}
           </Tabs>
+
+          <ForecastCardData data={selectedTime} location={location} />
+
           <div className='forecastCard__day'>
             {weatherData[tab].map((item, i) => (
               <ForecastItem
                 key={i}
                 item={item}
+                handleClick={(newItem) => setSelectedTime(newItem)}
               />
             ))}
           </div>
         </Card>
       )}
-    </div>
+    </>
   );
 }
+
+ForecastCard.propTypes = {
+  weatherData: PropTypes.objectOf(PropTypes.object).isRequired,
+  location: PropTypes.string.isRequired,
+};
 
 export default ForecastCard;

@@ -12,7 +12,7 @@ function Forecast() {
   useEffect(() => {
     if (userInput) {
       fetch(
-        `http://api.openweathermap.org/data/2.5/forecast?q=${userInput}&appid=${apiKey}`,
+        `https://cors-everywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=${userInput}&appid=${apiKey}`,
       )
         .then((response) => response.json())
         .then((res) => {
@@ -44,7 +44,7 @@ function Forecast() {
 
   return (
     <div className='forecast'>
-      <ForecastCard weatherData={weatherData} />
+      <ForecastCard weatherData={weatherData} location={userInput} />
     </div>
   );
 }

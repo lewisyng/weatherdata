@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './SearchForm.css';
 import PropTypes from 'prop-types';
-
-import { InputBase } from '@material-ui/core';
+import { Input } from '@material-ui/core';
 
 function SearchForm(props) {
   const [userIn, setUserIn] = useState();
@@ -18,7 +17,7 @@ function SearchForm(props) {
   return (
     <div className='searchForm'>
       <form onSubmit={(e) => fetchWeatherData(e)}>
-        <InputBase
+        <Input
           onChange={(event) => setUserIn(event.target.value)}
           value={userIn}
           placeholder='Suchen'

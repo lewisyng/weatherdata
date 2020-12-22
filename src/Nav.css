@@ -1,6 +1,12 @@
 .nav {
     display: flex;
-    background-color: rgb(41, 41, 41);
+    margin: 0 auto;
+    width: 70%;
+    justify-content: space-between;
+}
+
+.appbar__toolbar {
+    display: flex;
     justify-content: space-between;
 }
 
@@ -19,4 +25,25 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.appbar {
+    display: none;
+}
+
+.nav__links__small {
+    display: none;
+}
+
+header {
+    background-color: rgb(41, 41, 41) !important;
+}
+
+@media (max-width: 800px){
+    .nav__links__big {
+        display: none;
+    }
+    .nav__links__small {
+        display: block;
+    }
 }

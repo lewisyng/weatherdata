@@ -4,24 +4,8 @@
     align-items: center;
 }
 
-.currentWeather__data {
-    padding-top: 8rem;
-    margin: auto 0;
-    font-size: clamp(2rem, 5vw, 3rem);
-}
-
-.currentWeather__data__description {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-weight: bold;
-}
-
-.currentWeather__data__location {
-    text-align: center;
-    font-weight: bold;
-}
-
-.currentWeather__data__degrees, .currentWeather__data__wind {
-    font-weight: bold;
+.leaflet-container {
+    margin-top: 2rem;
+    height: 400px;
+    width: clamp(500px, 60%, 700px);
 }
