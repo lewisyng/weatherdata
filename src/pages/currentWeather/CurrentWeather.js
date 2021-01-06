@@ -7,9 +7,10 @@ import Map from './Map';
 
 function CurrentWeather() {
   const userInput = useContext(SearchContext);
-  const [weatherData, setWeatherData] = useState();
+  const [generalData, setGeneralData] = useState();
   const [lon, setLon] = useState();
   const [lat, setLat] = useState();
+  const [dailyWeatherData, setDailyWeatherData] = useState();
 
   useEffect(() => {
     if (userInput) {
@@ -17,20 +18,31 @@ function CurrentWeather() {
         `https://cors-everywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=${userInput}&appid=${apiKey}`,
       )
         .then((response) => response.json())
-        .then((data) => setWeatherData(data));
+        .then((data) => setGeneralData(data));
     }
   }, [userInput]);
 
   useEffect(() => {
-    if (weatherData) {
-      setLon(weatherData.coord.lon);
-      setLat(weatherData.coord.lat);
+    if (generalData) {
+      setLon(generalData.coord.lon);
+      setLat(generalData.coord.lat);
     }
-  }, [weatherData]);
+  }, [generalData]);
+
+  useEffect(() => {
+    if (lat && lon) {
+      fetch(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${apiKey}`,
+      )
+        .then((response) => response.json())
+        // .then(data => console.log(data))
+        .then((data) => setDailyWeatherData(data));
+    }
+  }, [lat, lon]);
 
   return (
     <div className='currentWeather'>
-      {weatherData && <CurrentWeatherData weatherData={weatherData} />}
+      {dailyWeatherData && <CurrentWeatherData generalData={generalData} specificData={dailyWeatherData} />}
 
       {(lon, lat) && <Map lon={lon} lat={lat} />}
     </div>
