@@ -3,6 +3,8 @@
     flex-direction: column;
     align-items: center;
     color: white;
+    cursor: pointer;
+    margin-left: auto;
 }
 
 .forecast__results__item img {
@@ -12,4 +14,8 @@
 
 .forecast__results__item__temp {
     font-weight: bold;
+}
+
+.forecast__results__item:hover {
+    filter: drop-shadow(0 0 3px black)
 }

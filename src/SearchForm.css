@@ -1,20 +1,25 @@
 .searchForm {
-    position: relative;
-    /* left: 50%; */
-    /* transform: translate(-50%); */
-    margin: auto 0;
+    margin: 0 auto;
+    width: clamp(40%, 60%, 700px);
+    background-color: rgb(41, 41, 41);
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    max-width: 100%;
 }
 
 .searchForm input::placeholder {
     color: white;
 }
 
-.MuiInputBase-input {
+.MuiInput-input {
     color: white !important;
     font-size: 1.4rem !important;
     text-align: center;
+    margin: 1rem 0 1rem 0 !important;
 }
 
-.MuiInputBase-input:focus {
-    border-bottom: 2px solid white;
+.MuiInput-underline:after {
+    border-bottom: 1px solid white !important;
+    margin: 0 0 1rem 0 !important;
 }

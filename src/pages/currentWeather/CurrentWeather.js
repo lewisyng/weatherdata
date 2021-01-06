@@ -2,54 +2,49 @@ import React, { useContext, useEffect, useState } from 'react';
 import './CurrentWeather.css';
 import apiKey from '../../api';
 import { SearchContext } from '../../context/searchContext';
+import CurrentWeatherData from './CurrentWeatherData';
+import Map from './Map';
 
 function CurrentWeather() {
   const userInput = useContext(SearchContext);
-  const [weatherData, setWeatherData] = useState();
-
-  const formatter = new Intl.NumberFormat('en-US', {
-    minimumFractionDigits: 1,
-    maximumFractionDigits: 1,
-  });
+  const [generalData, setGeneralData] = useState();
+  const [lon, setLon] = useState();
+  const [lat, setLat] = useState();
+  const [dailyWeatherData, setDailyWeatherData] = useState();
 
   useEffect(() => {
     if (userInput) {
       fetch(
-        `http://api.openweathermap.org/data/2.5/weather?q=${userInput}&appid=${apiKey}`,
+        `https://cors-everywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=${userInput}&appid=${apiKey}`,
       )
         .then((response) => response.json())
-        .then((data) => setWeatherData(data));
+        .then((data) => setGeneralData(data));
     }
   }, [userInput]);
 
-  let weather;
+  useEffect(() => {
+    if (generalData) {
+      setLon(generalData.coord.lon);
+      setLat(generalData.coord.lat);
+    }
+  }, [generalData]);
 
-  if (weatherData) {
-    weather = (
-      <>
-        <div className='currentWeather__data__description font-medium'>
-          {weatherData.weather[0].main}
-          <img
-            src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
-            alt=''
-          />
-        </div>
-        <div className='currentWeather__data__location font-large'>
-          {weatherData.name}
-        </div>
-        <div className='currentWeather__data__degrees font-medium'>
-          {`${formatter.format(weatherData.main.temp - 273.15)} °C`}
-        </div>
-        <div className='currentWeather__data__wind font-medium'>
-          {`${formatter.format(weatherData.wind.speed * 3.6)} km/h`}
-        </div>
-      </>
-    );
-  }
+  useEffect(() => {
+    if (lat && lon) {
+      fetch(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${apiKey}`,
+      )
+        .then((response) => response.json())
+        // .then(data => console.log(data))
+        .then((data) => setDailyWeatherData(data));
+    }
+  }, [lat, lon]);
 
   return (
     <div className='currentWeather'>
-      <div className='currentWeather__data'>{weatherData && weather}</div>
+      {dailyWeatherData && <CurrentWeatherData generalData={generalData} specificData={dailyWeatherData} />}
+
+      {(lon, lat) && <Map lon={lon} lat={lat} />}
     </div>
   );
 }

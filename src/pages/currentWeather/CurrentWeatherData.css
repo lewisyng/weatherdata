@@ -1,0 +1,50 @@
+.currentWeatherData {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    background-color: #F59AB3;
+    color: rgb(41, 41, 41) !important;
+    width: 400px;
+    padding: 1.5rem;
+}
+
+.currentWeatherData__location {
+    font-size: 2rem;
+    color: #212121;
+}
+
+.currentWeatherData__subHeader {
+    color: #757575;
+    font-weight: bold;
+    padding: 0.5rem 0;
+}
+
+.currentWeatherData__temp__icon {
+    display: flex;
+    font-size: 5rem;
+    padding-top: 1rem;
+    color: #757575;
+}
+
+.currentWeatherData__weather {
+    position: relative;
+    bottom: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.super {
+    vertical-align: super;
+    font-size: 3rem;
+}
+
+.cwd__data {
+    color: #757575;
+    font-weight: bold;
+    padding: 0.5rem 0;
+}
+
+.currentWeatherData__wind {
+    padding-top: 1rem;
+}
