@@ -21,30 +21,35 @@ function Forecast() {
     }
   }, [userInput]);
 
+  const createObjectFromResults = () => {
+    console.log('results', results);
+    const dataObj = { results: {}, place: results.city.name };
+
+    let counter = 0;
+
+    for (let item of results.list) {
+      const day = item.dt_txt.slice(0, 10);
+      if (!(day in dataObj['results'])) {
+        counter++;
+        if (counter > 4) {
+          break;
+        }
+        dataObj['results'][day] = [];
+      }
+      dataObj['results'][day].push(item);
+    }
+    setWeatherData(dataObj);
+  };
+
   useEffect(() => {
     if (results) {
-      const dataObj = {};
-      let counter = 0;
-      for (let item of results.list) {
-        const day = item.dt_txt.slice(0, 10);
-        if (!(day in dataObj)) {
-          counter += 1;
-          if (counter > 4) {
-            break;
-          }
-          dataObj[day] = [];
-        }
-        if (counter <= 4) {
-          dataObj[day].push(item);
-        }
-      }
-      setWeatherData(dataObj);
+      createObjectFromResults();
     }
   }, [results]);
 
   return (
     <div className='forecast'>
-      <ForecastCard weatherData={weatherData} location={userInput} />
+      <ForecastCard weatherData={weatherData} />
     </div>
   );
 }

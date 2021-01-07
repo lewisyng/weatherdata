@@ -1,0 +1,13 @@
+.footer {
+  margin-top: auto;
+  width: 100%;
+  background-color: rgb(41, 41, 41);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.createdBy {
+  margin: 1rem 0;
+}
