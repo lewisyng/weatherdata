@@ -29,18 +29,13 @@ function CurrentWeatherData(props) {
   };
 
   return (
-    <Card
-      elevation={2}
-      className='currentWeatherData'
-      style={{ color: '#F9F9F9' }}
-    >
+    <Card elevation={2} className='currentWeatherData' style={{}}>
       <CurrentWeatherHeader generalData={generalData} sliderTime={sliderTime} />
       <div className='currentWeatherData__temp__icon'>
-        {formatter.format(temp)}
-        <span className='super'>°C</span>
+        {formatter.format(temp)}°C
         <img
-          src={`http://openweathermap.org/img/wn/${generalData.weather[0].icon}@2x.png`}
-          alt=''
+          src={`http://openweathermap.org/img/wn/${generalData.weather[0].icon}.png`}
+          alt='weather icon'
         />
       </div>
       <div className='currentWeatherData__wind cwd__data'>
@@ -49,11 +44,11 @@ function CurrentWeatherData(props) {
       <div className='currentWeatherData__humidity cwd__data'>
         {`Humidity: ${humidity} %`}
       </div>
-      <WeatherSlider
+      {/* <WeatherSlider
         handleSliderChange={handleSliderChange}
         sliderMark={sliderMark}
         specificData={specificData}
-      />
+      /> */}
     </Card>
   );
 }

@@ -3,7 +3,7 @@ import './CurrentWeather.css';
 import apiKey from '../../api';
 import { SearchContext } from '../../context/searchContext';
 import CurrentWeatherData from './CurrentWeatherData';
-import Map from './Map';
+import GeoMap from './GeoMap';
 
 function CurrentWeather() {
   const userInput = useContext(SearchContext);
@@ -35,7 +35,6 @@ function CurrentWeather() {
         `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${apiKey}`,
       )
         .then((response) => response.json())
-        // .then(data => console.log(data))
         .then((data) => setDailyWeatherData(data));
     }
   }, [lat, lon]);
@@ -44,7 +43,7 @@ function CurrentWeather() {
     <div className='currentWeather'>
       {dailyWeatherData && <CurrentWeatherData generalData={generalData} specificData={dailyWeatherData} />}
 
-      {(lon, lat) && <Map lon={lon} lat={lat} />}
+      {(lon, lat) && <GeoMap lon={lon} lat={lat} />}
     </div>
   );
 }

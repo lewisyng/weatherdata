@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './assets/Header';
+import Footer from './Footer'
 import CurrentWeather from './pages/currentWeather/CurrentWeather';
 import Forecast from './pages/forecast/Forecast';
 import { SearchContext } from './context/searchContext';
@@ -20,6 +21,7 @@ function App() {
             <Route exact path='/' component={CurrentWeather} />
             <Route exact path='/forecast' component={Forecast} />
           </Switch>
+          <Footer />
         </SearchContext.Provider>
       </Router>
     </div>

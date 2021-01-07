@@ -6,42 +6,61 @@ import ForecastItem from './ForecastItem';
 import ForecastCardData from './ForecastCardData';
 
 function ForecastCard(props) {
-  const { weatherData, location } = props;
-  const [tab, setTab] = useState();
-  const [selectedTime, setSelectedTime] = useState();
+  const { weatherData } = props;
+  const [selectedTab, setSelectedTab] = useState();
+
+  const [dataOfSelectedTime, setDataOfSelectedTime] = useState();
 
   useEffect(() => {
+    console.log('data', weatherData);
     if (weatherData) {
-      setTab(Object.keys(weatherData)[0]);
+      let initiateTab = Object.keys(weatherData['results'])[0];
+      setSelectedTab(initiateTab);
+      setDataOfSelectedTime(weatherData['results'][initiateTab][0]);
     }
   }, [weatherData]);
 
+  const changeSelectedTime = (data) => {
+    setDataOfSelectedTime(
+      weatherData['results'][selectedTab].filter((obj) => {
+        return obj.dt_txt === data;
+      })[0],
+    );
+  };
+
   useEffect(() => {
-    if (tab) {
-      setSelectedTime(weatherData[tab][0]);
+    if (selectedTab) {
+      setDataOfSelectedTime(weatherData['results'][selectedTab][0]);
     }
-  }, [tab]);
+  }, [selectedTab]);
 
   return (
     <>
-      {selectedTime && (
-        <Card
-          className='forecastCard'
-        >
-          <Tabs value={tab} onChange={(event, newValue) => setTab(newValue)}>
-            {Object.keys(weatherData).map((item) => (
+      {dataOfSelectedTime && (
+        <Card elevation={2} className='forecastCard'>
+          <Tabs
+            variant='fullWidth'
+            value={selectedTab}
+            onChange={(event, newValue) => {
+              setSelectedTab(newValue);
+            }}
+          >
+            {Object.keys(weatherData['results']).map((item) => (
               <Tab value={item} key={item} label={item} />
             ))}
           </Tabs>
 
-          <ForecastCardData data={selectedTime} location={location} />
+          <ForecastCardData
+            dataOfSelectedTime={dataOfSelectedTime}
+            weatherData={weatherData}
+          />
 
           <div className='forecastCard__day'>
-            {weatherData[tab].map((item, i) => (
+            {weatherData['results'][selectedTab].map((item, i) => (
               <ForecastItem
                 key={i}
                 item={item}
-                handleClick={(newItem) => setSelectedTime(newItem)}
+                handleClick={changeSelectedTime}
               />
             ))}
           </div>

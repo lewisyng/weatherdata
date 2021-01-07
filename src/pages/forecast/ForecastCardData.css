@@ -1,4 +1,52 @@
 .forecastCardData {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 100%;
     margin: 1rem;
     line-height: 1.3;
+    /* justify-content: space-between; */
+}
+
+.forecastCardData__icon {
+
+}
+
+.forecastCardData__general {
+    width: 100%;
+    display: flex;
+}
+
+.forecastCardData__location {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.forecastCardData__temp {
+    margin: 0.5rem 0;
+}
+
+.forecastCardData__time, .forecastCardData__temp {
+    font-size: 1.2rem;
+}
+
+.forecastCardData__specific {
+    margin-left: 10vw;
+    font-size: 1rem;
+}
+
+.forecastCardData__icon {
+    margin-left: 10vw;
+    height: 100%;
+}
+
+.forecastCardData__icon img {
+    height: 80%;
+}
+
+@media (min-width: 450px) {
+    .forecastCardData {
+    }
+    .forecastCardData__icon {
+        margin-left: 40px;
+    }
 }
